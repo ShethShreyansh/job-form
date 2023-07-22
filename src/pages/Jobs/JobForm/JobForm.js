@@ -75,7 +75,7 @@ export default function JobForm() {
             {!urlData?.id ? 'Create Job' : `Update Job for - ${formValues.jobtitle}`}
             </div>
             <Button className="flex-end" onClick={()=>navigate('/')}>
-                Back to Job List
+                Back
             </Button>
         </div>
         <hr/>

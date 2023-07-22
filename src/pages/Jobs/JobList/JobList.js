@@ -12,28 +12,37 @@ export default function JobList() {
             <div className="flex-auto w-80 text-4xl text-center">
                 Job List
             </div>
-            <Button className="flex-end" onClick={()=>navigate('/create-job')}>
+            
+            {jobListData.length > 0 ?<Button className="flex-end" onClick={()=>navigate('/create-job')}>
                 Add New Job
-            </Button>
+            </Button>:''}
         </div>
         <hr/>
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {
-                jobListData.sort((a,b) => b?.id - a?.id).map((item) => {
+        {jobListData.length > 0 ?
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {jobListData.sort((a,b) => b?.id - a?.id).map((item) => {
                     return  <div key={item.id}>
                         <Card className={styles.cardContainer} onClick={() => navigate(`/create-job/${item.id}`)}>
-                                <div className="flex">
-                                    <h1 className="text-2xl"> {item?.jobtitle } </h1>
-                                    <div className="text-2xl"> - </div>
-                                    <h1  className="text-2xl"> {item?.jobType } </h1>
-                                </div>
-                                <div>Experience : {item?.jobExperience}, Salary : {item?.salary}</div>
-                                <div>Job Expires in next <b>{item?.jobExpiresIndays}</b> days</div>
-                                <div>Location : {item?.location}</div>
+                            <div className="flex">
+                                <h1 className="text-2xl"> {item?.jobtitle } </h1>
+                                <div className="text-2xl"> - </div>
+                                <h1  className="text-2xl"> {item?.jobType } </h1>
+                            </div>
+                            <div>Experience : {item?.jobExperience}, Salary : {item?.salary}</div>
+                            <div>Job Expires in next <b>{item?.jobExpiresIndays}</b> days</div>
+                            <div>Location : {item?.location}</div>
                         </Card>
                     </div>
-                })
-            }
-        </div>
+                })}
+            </div> :
+            <div className="m-auto gap-4 text-center">
+                <div className="mb-4">
+                    No Jobs Found
+                </div>
+                <Button className="flex-end" onClick={()=>navigate('/create-job')}>
+                    Add New Job
+                </Button>
+            </div>
+        }
     </Card>
 }
